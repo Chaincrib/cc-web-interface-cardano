@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+# Disallow admin or private paths by adding lines like:
+# Disallow: /admin/
+# Disallow: /api/

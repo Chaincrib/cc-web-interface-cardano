@@ -14,7 +14,7 @@ export const Signin = () => {
 		<main className={styles.main}>
 			<div className={styles.container}>
 				<header>
-					<Link to="#">
+					<Link to="#" aria-label="ChainCrib home">
 						<LogoFull />
 					</Link>
 				</header>

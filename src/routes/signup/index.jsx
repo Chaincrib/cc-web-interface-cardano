@@ -8,7 +8,7 @@ export const Signup = () => {
 		<main className={styles.main}>
 			<div className={styles.container}>
 				<header>
-					<Link to="/signin">
+					<Link to="/signin" aria-label="Go to sign in">
 						<LogoFull />
 					</Link>
 				</header>
