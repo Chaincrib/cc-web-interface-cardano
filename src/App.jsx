@@ -99,6 +99,35 @@ function App() {
 		};
 	}, [dispatch]);
 
+    // Ensure iframes have accessible titles (for third-party widgets that inject iframes)
+    useEffect(() => {
+        const setIframeTitleIfMissing = (iframe) => {
+            if (!(iframe && iframe.tagName === 'IFRAME')) return;
+            if (iframe.getAttribute('title')) return;
+            const src = iframe.getAttribute('src') || '';
+            let inferredTitle = 'Embedded content';
+            if (src.includes('nu.fi')) inferredTitle = 'NuFi Wallet Widget';
+            else if (src.includes('accounts.google.com')) inferredTitle = 'Google Accounts Frame';
+            iframe.setAttribute('title', inferredTitle);
+        };
+
+        document.querySelectorAll('iframe').forEach(setIframeTitleIfMissing);
+
+        const observer = new MutationObserver((mutations) => {
+            for (const mutation of mutations) {
+                mutation.addedNodes && mutation.addedNodes.forEach((node) => {
+                    if (node.nodeType !== 1) return; // ELEMENT_NODE
+                    if (node.tagName === 'IFRAME') setIframeTitleIfMissing(node);
+                    else if (node.querySelectorAll) {
+                        node.querySelectorAll('iframe').forEach(setIframeTitleIfMissing);
+                    }
+                });
+            }
+        });
+        observer.observe(document.body, { childList: true, subtree: true });
+        return () => observer.disconnect();
+    }, []);
+
 	nufiCoreSdk.onSocialLoginInfoChanged((data) => {
 		if (!data) {
 			dispatch(removeUser());

@@ -32,9 +32,12 @@ export default defineConfig({
 			},
 		}),
 	],
+	build: {
+		sourcemap: true,
+	},
 	server: {
 		headers: {
-			"Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval'; connect-src 'self' https://api.chaincrib.com https://wallet.nu.fi https://accounts.google.com https://www.googleapis.com; frame-src 'self' https://*.nu.fi https://auth.magic.link https://accounts.google.com; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; frame-ancestors 'self';",
+			"Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval'; connect-src 'self' https://api.chaincrib.com https://wallet.nu.fi https://accounts.google.com https://www.googleapis.com; frame-src 'self' https://*.nu.fi https://auth.magic.link https://accounts.google.com; img-src 'self' data: blob: https://res.cloudinary.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; frame-ancestors 'self';",
 		},
 	},
 	resolve: {
